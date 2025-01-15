@@ -3,6 +3,28 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+let lastScrollPosition = 0;
+
+const stretchEffect = () => {
+  const scrollPosition = window.scrollY;
+  const bg = document.querySelector("#wrapper > .bg");
+
+  // Calculate scaling value
+  const scaleValue = Math.min(3.05, 1 + scrollPosition / 5000); // Subtle stretch, capped at 1.05
+
+  // Apply scaling transform
+  bg.style.transform = `scale(${scaleValue})`;
+
+  lastScrollPosition = scrollPosition;
+};
+
+// Use requestAnimationFrame for smooth animations
+const smoothScrollHandler = () => {
+  requestAnimationFrame(stretchEffect);
+};
+
+// Add the scroll listener
+window.addEventListener("scroll", smoothScrollHandler);
 
 (function($) {
 
